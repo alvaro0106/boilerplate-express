@@ -1,3 +1,4 @@
+const { response, request } = require('express');
 let express = require ('express');
 let app = express()
 app.listen(3001)
@@ -27,7 +28,7 @@ app.use('/public', express.static(__dirname + '/public'))
 
 let message = {message: "Hello Json"};
 
-// .env
+// .env ** CORREGIR
 app.get("/json", (req, res) => {
   if(process.env.MESSAGE_STYLE === 'uppercase'){
       res.json({"message": "hello json".toUpperCase()})
@@ -36,9 +37,19 @@ app.get("/json", (req, res) => {
   }
 });
 
-
 // Middleware
-app.use((req, res, next) => {
-  console.log(req.method + '' + req.path + '-' + req.ip);
+// app.use((req, res, next) => {
+//   console.log(req.method + '' + req.path + '-' + req.ip);
   
+// })
+
+
+// Chain Middleware to Create a Time Server
+app.get("/now", (request, response, next) => {
+  request.time = new Date().toString();
+  next()
+
+}, (request, response) => {
+  response.json({'time': request.time})
+
 })

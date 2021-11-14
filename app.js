@@ -44,7 +44,7 @@ app.get("/json", (req, res) => {
 // })
 
 
-// --> mount the body-parser milddelware here *************
+// --> mount the" body-parser milddelware" here *************
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -103,4 +103,12 @@ app.get('/profile',(req, res ) => {
     res.json('no foud')
   }
 })
+
+
+// --> 12) Get data from POST 
+
+app.post("/name", function(req, res){
+  console.log(req.body.first);
+  res.json({name: req.body.first + " " + req.body.last});
+});
 

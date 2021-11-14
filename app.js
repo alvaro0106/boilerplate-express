@@ -1,3 +1,4 @@
+var bodyParser = require('body-parser');
 const { response, request } = require('express');
 let express = require ('express');
 let app = express()
@@ -40,8 +41,23 @@ app.get("/json", (req, res) => {
 // Middleware
 // app.use((req, res, next) => {
 //   console.log(req.method + '' + req.path + '-' + req.ip);
-  
 // })
+
+
+// --> mount the body-parser milddelware here *************
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json 
+app.use(bodyParser());
+
+app.get("/body-parsed-info", function(req, res){
+  // res.json({ parsed: bodyParser.json() });
+  console.log(bodyParser)
+});
+
+// --> mount the body-parser milddelware here  FIN *************
 
 
 // Chain Middleware to Create a Time Server

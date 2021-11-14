@@ -62,3 +62,29 @@ app.get("/:word/echo", (req, res) => {
     echo: word
   });
 });
+
+// Get Route Parameter Input from the ClientPassed
+let people = {
+  'alice' : {name: 'Alice', age : 22},
+  'bob' : {name: 'bob', age : 12},
+  'yo' : {name: 'yo', age : 20},
+}
+
+// app.get('profile', (request, response) => {
+//   let name = request.name
+//   if(people[name]){
+//     response.json(people[name])
+//   }else{
+//     response.json('no foud')
+//   }
+// })
+
+app.get('/profile',(req, res ) => {
+  let name = request.query.name;
+  if(people[name]){
+    res.json(people[name])
+  }else{
+    res.json('no foud')
+  }
+})
+
